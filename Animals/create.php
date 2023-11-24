@@ -54,17 +54,18 @@ mysqli_close($conn);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Bai Jamjuree', sans-serif;
-            background-color: #DEDEDE;
-        }
-
-        .form-control {
-            background-color: #FDF9F9;
-            border: 1px solid #000000;
-        }
-    </style>
+  <link rel="stylesheet" href="../style/stylesheet.css">
+  <style>
+    body{
+      font-family: var(--font);
+      background-color: var(--primary-color);
+      color: var(--text-color);
+    }
+    .form-control {
+        background-color: #FDF9F9;
+        border: 1px solid #000000;
+    }
+  </style>
 
     <script>
         function checkFormLength() {

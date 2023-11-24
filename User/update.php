@@ -52,30 +52,35 @@ if(isset($_POST['update'])){
     }
 
     if(!$error){
-        $pass = hash("sha256", $pass);
+      $pass = hash("sha256", $pass);
 
-        // Use prepared statements to prevent SQL injection
-        $stmt = mysqli_prepare($conn, "UPDATE `user` SET `email`=?, `password`=?, `picture_url`=?, `first_name`=?, `last_name`=?, `phone_number`=?, `address`=? WHERE user_id = ?");
-        mysqli_stmt_bind_param($stmt, "sssssssi", $email, $pass, $picture[0], $firstName, $lastName, $phoneNumber, $address, $id);
-        $result = mysqli_stmt_execute($stmt);
-
-        if($result){
-            echo "
-            <div class='alert alert-success mb-0' role='alert'>
-                User updated!
-            </div>
-            ";
-        } else {
-            echo "
-            <div class='alert alert-danger' role='alert'>
-                Something went wrong!
-            </div>
-            ";
+      if($_FILES["picture_url"]["error"] == 0){
+          if($row["picture_url"] !== "avatar.png"){
+              unlink("../assets/$row[picture_url]");
+          }
+          $sql = "UPDATE `user` SET `email`= '$email', `password`= '$pass', `picture_url`= '$picture[0]', `first_name`= '$firstName', `last_name`= '$lastName', `phone_number`= '$phoneNumber', `address`= '$address' WHERE user_id = $id";
         }
+      else{
+        $sql = "UPDATE `user` SET `email`= '$email', `password`= '$pass', `first_name`= '$firstName', `last_name`= '$lastName', `phone_number`= '$phoneNumber', `address`= '$address' WHERE user_id = $id";
+      }
 
-        // Close the prepared statement
-        mysqli_stmt_close($stmt);
-    }
+      $result = mysqli_query($conn, $sql);
+
+      if($result){
+          echo "
+          <div class='alert alert-success mb-0' role='alert'>
+              User updated!
+          </div>
+          ";
+      }else{
+          echo "
+          <div class='alert alert-danger' role='alert'>
+              Something went wrong!
+          </div>
+          ";
+      }
+  }
+
 }
 ?>
 
@@ -86,17 +91,18 @@ if(isset($_POST['update'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Bai Jamjuree', sans-serif;
-            background-color: #DEDEDE;
-        }
-    </style>
+  <link rel="stylesheet" href="../style/stylesheet.css">
+  <style>
+    body{
+      font-family: var(--font);
+      background-color: var(--primary-color);
+      color: var(--text-color);
+    }
+  </style>
 </head>
 
 <body>

@@ -1,7 +1,7 @@
 <?php 
 echo
 "<nav class='navbar navbar-expand-lg navbar' style='background-color: #ffffff;'>
-    <div class='container-fluid' style='height: 50px;'>
+    <div class='container-fluid'>
         <a class='navbar-brand' href='/php/BE20_CR5_BrunoKreppel/index.php'><img width='28' height='28' src='https://img.icons8.com/ios/28/animal-shelter.png' alt='animal-shelter' class='pb-1'/> Animal-Shelter</a>
         <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav'
             aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'
@@ -29,6 +29,10 @@ echo
                     
                     <li class='nav-item'>
                     <a class='nav-link' href='/php/BE20_CR5_BrunoKreppel/user/logout.php'>Logout</a>
+                    </li>
+
+                    <li class='nav-item'>
+                    <a class='nav-link' href='/php/BE20_CR5_BrunoKreppel/user/profile.php'>Profile</a>
                     </li>
 
                     <li class='nav-item'>
