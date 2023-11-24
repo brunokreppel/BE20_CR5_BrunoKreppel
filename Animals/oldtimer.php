@@ -81,6 +81,9 @@ mysqli_close($conn);
       background-color: var(--primary-color);
       color: var(--text-color);
     }
+    h1{
+      color: var(--accent-color);
+    }
   </style>
 
   <title>Homepage</title>
@@ -91,8 +94,8 @@ mysqli_close($conn);
 
 
 <div class="container">
-    <h1 class="fw-bold text-center my-5 display-3">Sad Animals</h1>
-    <hr class='my-2 mb-5'>
+    <h1 class="fw-bold text-center my-5 display-3">Oldtimer</h1>
+    <hr class='my-2 mb-5' style=" color: var(--accent-color);">
 </div>
 
 <div class="container">

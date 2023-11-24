@@ -56,6 +56,9 @@ mysqli_close($conn);
       background-color: var(--primary-color);
       color: var(--text-color);
     }
+    h1{
+      color: var(--accent-color);
+    }
   </style>
 
 </head>
@@ -65,10 +68,10 @@ mysqli_close($conn);
     <?php require_once '../components/hero.php'; ?>
 
 
-    <div class="container">
-        <h1 class="fw-bold text-center my-4 display-4">Animal Details</h1>
-        <hr class='my-2 mb-5'>
-    </div>
+<div class="container">
+    <h1 class="fw-bold text-center my-5 display-3">Animal <Details></Details></h1>
+    <hr class='my-2 mb-5' style=" color: var(--accent-color);">
+</div>
 
     <div class="container w-50">
         <?php echo $cards ?>

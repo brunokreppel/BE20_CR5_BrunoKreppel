@@ -65,6 +65,9 @@ mysqli_close($conn);
         background-color: #FDF9F9;
         border: 1px solid #000000;
     }
+    h1{
+      color: var(--accent-color);
+    }
   </style>
 
     <script>
@@ -97,10 +100,10 @@ mysqli_close($conn);
 
     <?php require_once '../components/navbar.php'; ?>
 
-    <div class="container">
-        <h1 class="fw-bold text-center my-5 display-4">Create Animal Entry</h1>
-        <hr class='my-2 mb-5'>
-    </div>
+<div class="container">
+    <h1 class="fw-bold text-center my-5 display-3">Create Animal Entry</h1>
+    <hr class='my-2 mb-5' style=" color: var(--accent-color);">
+</div>
 
     <div class="container">
         <form action="" method="post" name="updateForm" onsubmit="return checkFormLength();">

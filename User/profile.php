@@ -9,7 +9,7 @@ if (!isset($_SESSION["user"]) && !isset($_SESSION["adm"])) {
 
 require_once '../components/db_Connect.php';
 
-// Assuming you have a table named 'user' with columns 'user_id', 'name', 'email', 'img', etc.
+// Assuming you have a table named 'user' with columns 'user_id', 'first_name', 'last_name', 'email', 'picture_url', etc.
 $user_id = $_SESSION["user"] ?? $_SESSION["adm"];
 $sql = "SELECT * FROM `user` WHERE `user_id` = '$user_id'";
 $result = mysqli_query($conn, $sql);
@@ -35,26 +35,64 @@ mysqli_close($conn);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style/stylesheet.css">
-  <style>
-    body{
-      font-family: var(--font);
-      background-color: var(--primary-color);
-      color: var(--text-color);
-    }
-  </style>
+    <link rel="stylesheet" href="../style/stylesheet.css">
+    <style>
+        body {
+            font-family: 'Bai Jamjuree', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            padding-top: 20px;
+        }
+        h1, h2 {
+            color: #e74c3c;
+        }
+        .profile-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile-section {
+            background-color: #fff;
+            margin-top: 70px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 
-<?php require_once '../components/navbar.php'; ?>
-
-
 <body>
-    <h1>Welcome, <?= $user["first_name"] ?></h1>
-    <img src="../assets/<?= $user['picture_url'] ?>" alt="Profile Image" width="250px" height="250px">
+    <?php require_once '../components/navbar.php'; ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h1 class="fw-bold text-center mb-4">Welcome, <?= $user["first_name"] ?></h1>
+                <img src="../assets/<?= $user['picture_url'] ?>" alt="Profile Image" class="profile-img">
+            </div>
+            <div class="col-md-8">
+                <div class="profile-section">
+                    <h2 class="mb-3">Profile Information</h2>
+                    <ul>
+                        <li><strong>First Name:</strong> <?= $user["first_name"] ?></li>
+                        <li><strong>Last Name:</strong> <?= $user["last_name"] ?></li>
+                        <li><strong>Email:</strong> <?= $user["email"] ?></li>
+                        <!-- Add more user information as needed -->
+                    </ul>
+
+                    <h2 class="mt-4 mb-3">Update Profile / Logout</h2>
+                    <!-- Add an update form here with fields for updating user information -->
+
+                    <a href="/php/BE20_CR5_BrunoKreppel/user/update.php" class="btn btn-primary">Update Profile</a>
+                    <a href="/php/BE20_CR5_BrunoKreppel/user/logout.php" class="btn btn-danger">Logout</a>
+                </div>
+            </div>
+        </div>
+
+    
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
-
 </html>

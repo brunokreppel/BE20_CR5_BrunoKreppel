@@ -102,11 +102,20 @@ if(isset($_POST['update'])){
       background-color: var(--primary-color);
       color: var(--text-color);
     }
+    h1{
+      color: var(--accent-color);
+    }
   </style>
 </head>
 
 <body>
     <?php require_once '../components/navbar.php'; ?>
+
+    <div class="container">
+    <h1 class="fw-bold text-center my-5 display-3">Update Profile</h1>
+    <hr class='my-2 mb-5' style=" color: var(--accent-color);">
+    </div>
+
     <div class="container">
         <form action="" method="post" enctype="multipart/form-data">
             <!-- Personal Information Section -->
@@ -124,7 +133,7 @@ if(isset($_POST['update'])){
                 <div class="col-md-4">
                     <label for="picture_url" class="form-label">Profile Picture:</label>
                     <label for="fileInput" class="file-label">
-                        <img src="../assets/<?= $row["picture_url"] ?? 'avatar.png' ?>" alt="User Picture" class="img-fluid rounded-circle pl-3" style="cursor: pointer; width: 80px; height: 80px;">
+                        <img src="../assets/<?= $row["picture_url"] ?? 'avatar.png' ?>" alt="User Picture" class="img-fluid rounded-circle pl-3 object-fit-cover" style="cursor: pointer; width: 80px; height: 80px;">
                     </label>
                     <input type="file" id="fileInput" name="picture_url" class="form-control visually-hidden">
                 </div>
