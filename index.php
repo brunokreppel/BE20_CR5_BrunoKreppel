@@ -4,69 +4,70 @@ session_start();
 require_once 'components/db_Connect.php';
 
 if (isset($_SESSION["delete_message"])) {
-  echo $_SESSION["delete_message"];
-  unset($_SESSION["delete_message"]);
+    echo $_SESSION["delete_message"];
+    unset($_SESSION["delete_message"]);
 }
 
-// if (isset($_SESSION["user"]) && isset($_POST["buy"])){
-// $date = date("Y-m-d");
-// $sql = "INSERT INTO `user_book`(`fk_user`, `fk_product`, `buy_date`) VALUES ('$_SESSION[user]','$_POST[prod]','$date')";
-// if (mysqli_query($conn, $sql)) {
-//     echo "PRODUCT Bought";
-// }else{
-//     echo "not baught";
-// }
+if (isset($_SESSION["user"]) && isset($_POST["adopt"])) {
+    $date = date("Y-m-d");
+    $animal_id = $_POST["animal"];
+    $user_id = $_SESSION["user"];
 
-// }
+    $sql = "INSERT INTO `pet_adoption` (`fk_user`, `fk_animal`, `adoption_date`) VALUES ('$user_id', '$animal_id', '$date')";
 
+    if (mysqli_query($conn, $sql)) {
+        echo "Animal Adopted";
+    } else {
+        echo "Not Adopted";
+    }
+}
 
 $sql = "SELECT * FROM Animal";
 $result = mysqli_query($conn, $sql);
 $cards = "";
 
-// Loop to display all entries in the database
 if (mysqli_num_rows($result) > 0) {
-  while ($row = mysqli_fetch_assoc($result)) {
-      $cards .= "
-      <div class='p-2 d-flex justify-content-center'>
-          <div class='card position-relative h-100 shadow-md' style='background-color: #f1eeee; width: 22rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;'>
-              <img src='{$row['photo_url']}' class='card-img-top object-fit-cover' alt='...' style='height: 22rem; transition: transform 0.3s ease-in-out;' 
-              onmouseover='this.style.transform=\"scale(1.1)\"' onmouseout='this.style.transform=\"scale(1)\"'>
-              <div class='card-body pt-4 pb-4 mb-5'>
-                  <h5 class='card-title fw-bold'>{$row['name']}</h5>
-                  <hr class='my-2'>
-                  <p class='card-text fw-light'><span class='fw-bold'>Description:</span> {$row['description']}</p>
-                  <p class='card-text fw-light'><span class='fw-bold'>Size:</span> {$row['size']}</p>
-                  <p class='card-text fw-light'><span class='fw-bold'>Age:</span> {$row['age']}</p>
-                  <p class='card-text fw-light'><span class='fw-bold'>Vaccinated:</span> " . ($row['vaccinated'] ? 'Yes' : 'No') . "</p>
-                  <p class='card-text fw-light'><span class='fw-bold'>Breed:</span> {$row['breed']}</p>
-                  <p class='card-text fw-light'><span class='fw-bold'>Status:</span> {$row['status']}</p>
-              </div>
-              <div class='btn-group position-absolute bottom-0 start-50 translate-middle-x mb-3'>
-                  <a href='animals/details.php?id={$row['animal_id']}' class='btn btn-outline-info mx-2 rounded'>Details</a>";
+    while ($row = mysqli_fetch_assoc($result)) {
+        $cards .= "
+        <div class='p-2 d-flex justify-content-center'>
+            <div class='card position-relative h-100 shadow-md' style='background-color: #f1eeee; width: 22rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;'>
+                <img src='{$row['photo_url']}' class='card-img-top object-fit-cover' alt='...' style='height: 22rem; transition: transform 0.3s ease-in-out;' 
+                onmouseover='this.style.transform=\"scale(1.1)\"' onmouseout='this.style.transform=\"scale(1)\"'>
+                <div class='card-body pt-4 pb-4 mb-5'>
+                    <h5 class='card-title fw-bold'>{$row['name']}</h5>
+                    <hr class='my-2'>
+                    <p class='card-text fw-light'><span class='fw-bold'>Description:</span> {$row['description']}</p>
+                    <p class='card-text fw-light'><span class='fw-bold'>Size:</span> {$row['size']}</p>
+                    <p class='card-text fw-light'><span class='fw-bold'>Age:</span> {$row['age']}</p>
+                    <p class='card-text fw-light'><span class='fw-bold'>Vaccinated:</span> " . ($row['vaccinated'] ? 'Yes' : 'No') . "</p>
+                    <p class='card-text fw-light'><span class='fw-bold'>Breed:</span> {$row['breed']}</p>
+                    <p class='card-text fw-light'><span class='fw-bold'>Status:</span> {$row['status']}</p>
+                </div>
+                <div class='btn-group position-absolute bottom-0 start-50 translate-middle-x mb-3'>
+                    <a href='animals/details.php?id={$row['animal_id']}' class='btn btn-outline-info mx-2 rounded'>Details</a>";
 
-                      if (isset($_SESSION["user"])) {
-                          $cards .=  
-                          " 
-                          <form action='' method='post'>
-                              <input type='hidden' name='animal' value='{$row['animal_id']}'>
-                              <input type='submit' value='Adopt' name='adopt'>
-                          </form>
-                          ";
-                      }
-                  $cards .= "
-              </div>
-          </div>
-      </div>
-      ";
-  }
+        if (isset($_SESSION["user"])) {
+            $cards .=
+                " 
+                <form action='' method='post'>
+                    <input type='hidden' name='animal' value='{$row['animal_id']}'>
+                    <input type='submit' value='Adopt' name='adopt'>
+                </form>
+                ";
+        }
+        $cards .= "
+                </div>
+            </div>
+        </div>
+        ";
+    }
 } else {
-  $cards .= "No data found.";
+    $cards .= "No data found.";
 }
-
 
 mysqli_close($conn);
 ?>
+
 
 
 
