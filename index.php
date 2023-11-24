@@ -13,7 +13,7 @@ if (isset($_SESSION["user"]) && isset($_POST["adopt"])) {
     $animal_id = $_POST["animal"];
     $user_id = $_SESSION["user"];
 
-    $sql = "INSERT INTO `pet_adoption` (`fk_user`, `fk_animal`, `adoption_date`) VALUES ('$user_id', '$animal_id', '$date')";
+    $sql = "INSERT INTO `pet_adoption` (`fk_user`, `fk_animal`, `adoption_date`) VALUES ('$_SESSION[user]', '$_POST[animal]', '$date')";
 
     if (mysqli_query($conn, $sql)) {
         echo "Animal Adopted";
@@ -87,16 +87,20 @@ mysqli_close($conn);
       background-color: var(--primary-color);
       color: var(--text-color);
     }
+    h1{
+      color: var(--accent-color);
+    }
   </style>
 
   <title>Homepage</title>
 </head>
 <body>
 <?php require_once 'components/navbar.php'; ?>
+<?php require_once 'components/hero.php'; ?>
 
 <div class="container">
-    <h1 class="fw-bold text-center my-5 display-3">Sad Animals</h1>
-    <hr class='my-2 mb-5'>
+    <h1 class="fw-bold text-center my-5 display-3">Our Animals</h1>
+    <hr class='my-2 mb-5' style=" color: var(--accent-color);">
 </div>
 
 <div class="container">
@@ -104,7 +108,6 @@ mysqli_close($conn);
         <?php echo $cards ?>
     </div>
 </div>
-
 
 
 

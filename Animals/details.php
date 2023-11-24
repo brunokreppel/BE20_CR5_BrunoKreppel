@@ -62,6 +62,8 @@ mysqli_close($conn);
 
 <body>
     <?php require_once '../components/navbar.php'; ?>
+    <?php require_once '../components/hero.php'; ?>
+
 
     <div class="container">
         <h1 class="fw-bold text-center my-4 display-4">Animal Details</h1>
