@@ -30,7 +30,7 @@ if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         $cards .= "
         <div class='p-2 d-flex justify-content-center'>
-            <div class='card position-relative h-100 shadow-md' style='background-color: #f1eeee; width: 22rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;'>
+            <div class='card position-relative h-100 shadow-md' style='background-color: #f8f9fa; width: 22rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;'>
                 <img src='{$row['photo_url']}' class='card-img-top object-fit-cover' alt='...' style='height: 22rem; transition: transform 0.3s ease-in-out;' 
                 onmouseover='this.style.transform=\"scale(1.1)\"' onmouseout='this.style.transform=\"scale(1)\"'>
                 <div class='card-body pt-4 pb-4 mb-5'>
@@ -43,16 +43,21 @@ if (mysqli_num_rows($result) > 0) {
                     <p class='card-text fw-light'><span class='fw-bold'>Breed:</span> {$row['breed']}</p>
                     <p class='card-text fw-light'><span class='fw-bold'>Status:</span> {$row['status']}</p>
                 </div>
-                <div class='btn-group position-absolute bottom-0 start-50 translate-middle-x mb-3'>
-                    <a href='animals/details.php?id={$row['animal_id']}' class='btn btn-outline-info mx-2 rounded'>Details</a>";
+                <div class='position-absolute bottom-0 start-50 translate-middle-x mb-3 w-100 d-flex justify-content-center'>
+                    <a href='animals/details.php?id={$row['animal_id']}' class='btn btn-info mx-2 rounded'>Details</a>";
 
         if (isset($_SESSION["user"])) {
             $cards .=
                 " 
                 <form action='' method='post'>
-                    <input type='hidden' name='animal' value='{$row['animal_id']}'>
-                    <input type='submit' value='Adopt' name='adopt'>
-                </form>
+                <input type='hidden' name='animal' value='{$row['animal_id']}'>
+                
+                    <button type='submit' name='adopt' class='btn btn-warning mx-2 rounded' style='background-color: #f39c12; border-color: #f39c12;'>
+                        <img src='https://img.icons8.com/material-two-tone/24/cat-footprint.png' alt='cat-footprint' class='me-2'/>
+                        Adopt
+                    </button>
+             
+            </form>
                 ";
         }
         $cards .= "
@@ -99,7 +104,8 @@ mysqli_close($conn);
 <?php require_once 'components/hero.php'; ?>
 
 <div class="container">
-    <h1 class="fw-bold text-center my-5 display-3">Our Animals</h1>
+    <h1 class="fw-bold text-center my-5 display-3">Our Animals <img width="64" height="64" src="https://img.icons8.com/color/64/dog-paw-print.png" alt="dog-paw-print"/>
+</h1>
     <hr class='my-2 mb-5' style=" color: var(--accent-color);">
 </div>
 

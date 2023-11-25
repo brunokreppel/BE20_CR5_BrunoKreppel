@@ -75,25 +75,45 @@ mysqli_close($conn);
       background-color: var(--primary-color);
       color: var(--text-color);
     }
+    .container1 {
+          
+            margin: auto;
+            margin-top: 50px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+        }
   </style>
 </head>
 
 <body>
     <?php require_once '../components/navbar.php'; ?>
+    <?php require_once '../components/hero.php'; ?>
+ 
     <div class="container">
-        <form action="" method="post">
-            <label>
-                Email:
-                <input type="email" name="email" class="form-control">
-                <span><?= $emailError ?></span>
-            </label>
-            <label>
-                Password:
-                <input type="password" name="password" class="form-control">
-                <span><?= $passError ?></span>
-            </label>
-            <input type="submit" value="Login" name="login" class="btn btn-primary mt-3 d-flex">
-        </form>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+            <div class="container container1">
+    <h1 class="fw-bold text-center my-5 display-3">Login <img width="64" height="64" src="https://img.icons8.com/color/64/dog-paw-print.png" alt="dog-paw-print"/>
+
+</h1>
+                <form action="" method="post">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" name="email" id="email" class="form-control">
+                        <span class="text-danger"><?= $emailError ?></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" name="password" id="password" class="form-control">
+                        <span class="text-danger"><?= $passError ?></span>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" name="login" class="btn btn-primary mt-3">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

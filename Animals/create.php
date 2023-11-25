@@ -62,7 +62,7 @@ mysqli_close($conn);
       color: var(--text-color);
     }
     .form-control {
-        background-color: #FDF9F9;
+        background-color: #f8f9fa;
         border: 1px solid #000000;
     }
     h1{
@@ -124,9 +124,10 @@ mysqli_close($conn);
 
             <label for="age" class="form-label">Age:</label>
             <input type="number" name="age" class="form-control mb-2" required>
-
+            <br>
             <label for="vaccinated" class="form-check-label">Vaccinated:</label>
             <input type="checkbox" name="vaccinated" class="form-check-input mb-2">
+            <br>
             <br>
 
             <label for="breed" class="form-label">Breed:</label>

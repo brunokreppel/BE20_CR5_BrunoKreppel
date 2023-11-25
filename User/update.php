@@ -72,6 +72,7 @@ if(isset($_POST['update'])){
               User updated!
           </div>
           ";
+          header("Location: ../user/update.php");
       }else{
           echo "
           <div class='alert alert-danger' role='alert'>
@@ -97,29 +98,68 @@ if(isset($_POST['update'])){
     <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style/stylesheet.css">
   <style>
-    body{
-      font-family: var(--font);
-      background-color: var(--primary-color);
-      color: var(--text-color);
-    }
-    h1{
-      color: var(--accent-color);
-    }
-  </style>
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            font-family: var(--font);
+        }
+
+        h1 {
+            color: var(--accent-color);
+        }
+
+        .container1 {
+            background-color: #fff; /* White background for the form container */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .form-label {
+            margin-top: 10px;
+            display: block;
+        }
+
+        .file-label {
+            cursor: pointer;
+            display: block;
+        }
+
+        .img-fluid {
+            border: 2px solid #f8f9fa; /* Match the background color */
+            border-radius: 50%;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .img-fluid:hover {
+            transform: scale(1.1);
+        }
+        
+    </style>
 </head>
 
 <body>
     <?php require_once '../components/navbar.php'; ?>
 
-    <div class="container">
-    <h1 class="fw-bold text-center my-5 display-3">Update Profile</h1>
-    <hr class='my-2 mb-5' style=" color: var(--accent-color);">
+    <div class="container pt-5">
+        <h1 class="fw-bold text-center my-5 display-3">Update Profile</h1>
+        <hr class='my-2 mb-5' style="color: var(--accent-color);">
     </div>
 
-    <div class="container">
+    <div class="container container1">
         <form action="" method="post" enctype="multipart/form-data">
             <!-- Personal Information Section -->
             <div class="row mt-3">
+            <div class="col-md-4">
+        <label for="picture_url" class="form-label">Profile Picture:</label>
+        <div class="d-flex justify-content-around">
+            <input type="file" id="fileInput" name="picture_url" class="form-control visually-hidden">
+            <label for="fileInput" class="file-label me-2">
+                <img src="../assets/<?= $row["picture_url"] ?? 'avatar.png' ?>" alt="User Picture" class="img-fluid object-fit-cover" style="cursor: pointer; width: 120px; height: 120px; border-radius: 50%;">
+            </label>
+        </div>
+    </div>
                 <div class="col-md-4">
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" class="form-control" value="<?= $row["email"] ?? "" ?>">
@@ -129,13 +169,6 @@ if(isset($_POST['update'])){
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" class="form-control">
                     <span class="text-danger"><?= $passError ?></span>
-                </div>
-                <div class="col-md-4">
-                    <label for="picture_url" class="form-label">Profile Picture:</label>
-                    <label for="fileInput" class="file-label">
-                        <img src="../assets/<?= $row["picture_url"] ?? 'avatar.png' ?>" alt="User Picture" class="img-fluid rounded-circle pl-3 object-fit-cover" style="cursor: pointer; width: 80px; height: 80px;">
-                    </label>
-                    <input type="file" id="fileInput" name="picture_url" class="form-control visually-hidden">
                 </div>
             </div>
 
@@ -163,7 +196,7 @@ if(isset($_POST['update'])){
             </div>
 
             <!-- Update Button Section -->
-            <div class="row mt-3">
+            <div class="row mt-4">
                 <div class="col-md-12 d-flex justify-content-center">
                     <button type="submit" name="update" class="btn btn-primary">Update Information</button>
                 </div>

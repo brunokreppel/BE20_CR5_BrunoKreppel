@@ -24,7 +24,6 @@ if ($result && mysqli_num_rows($result) === 1) {
 
 mysqli_close($conn);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,29 +34,30 @@ mysqli_close($conn);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style/stylesheet.css">
+    <link rel="stylesheet" href="/php/BE20_CR5_BrunoKreppel/style/stylesheet.css">
     <style>
         body {
-            font-family: 'Bai Jamjuree', sans-serif;
-            background-color: #f8f9fa;
-            color: #343a40;
-            padding-top: 20px;
+            font-family: var(--font);
+            background-color: var(--primary-color);
+            color: var(--text-color);
         }
-        h1, h2 {
-            color: #e74c3c;
+        h2 {
+            color: var(--accent-color);
         }
         .profile-img {
             max-width: 100%;
-            height: auto;
+            height: 523px; 
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
         }
         .profile-section {
             background-color: #fff;
-            margin-top: 70px;
+            height: 523px;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            min-height: 300px; /* Adjusted min-height for smaller screens */
         }
     </style>
 </head>
@@ -65,32 +65,42 @@ mysqli_close($conn);
 <body>
     <?php require_once '../components/navbar.php'; ?>
 
-    <div class="container">
+    <div class="container mt-5 pt-5">
         <div class="row">
-            <div class="col-md-4">
-                <h1 class="fw-bold text-center mb-4">Welcome, <?= $user["first_name"] ?></h1>
+        <h1 class="fw-bold mb-5 text-start">Welcome, <?= $user["first_name"] ?>.</h1>
+            <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12  mb-4">
+            
                 <img src="../assets/<?= $user['picture_url'] ?>" alt="Profile Image" class="profile-img">
             </div>
-            <div class="col-md-8">
-                <div class="profile-section">
+            <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12  position-relative">
+                
+                <div class="profile-section position-relative">
+                    
+                <div class="pb-5 ">
+                       
+                       <p><h2>Thank you, <?= $user["first_name"] ?>!</h2></p>
+                       <p class="px-3 pt-4"> We're delighted to have you as part of our community. Thank you for being a valued member. Below, you'll find your profile information. If anything needs updating, feel free to use the "Update Profile" button. If you have any questions or concerns, please don't hesitate to reach out. Enjoy your time here!</p>
+                       </div>
+       
                     <h2 class="mb-3">Profile Information</h2>
+
                     <ul>
+
                         <li><strong>First Name:</strong> <?= $user["first_name"] ?></li>
                         <li><strong>Last Name:</strong> <?= $user["last_name"] ?></li>
                         <li><strong>Email:</strong> <?= $user["email"] ?></li>
-                        <!-- Add more user information as needed -->
-                    </ul>
+                        <img style="position: absolute; left: 60%; bottom: 20%;" width="148" height="148" src="https://img.icons8.com/color/148/dog-paw-print.png" alt="dog-paw-print"/>
+<!-- Add more user information as needed -->
+</ul>
 
-                    <h2 class="mt-4 mb-3">Update Profile / Logout</h2>
-                    <!-- Add an update form here with fields for updating user information -->
-
-                    <a href="/php/BE20_CR5_BrunoKreppel/user/update.php" class="btn btn-primary">Update Profile</a>
-                    <a href="/php/BE20_CR5_BrunoKreppel/user/logout.php" class="btn btn-danger">Logout</a>
+                    <div class="btn-group position-absolute bottom-0 left-0 mb-4">
+                        
+                        <a href="/php/BE20_CR5_BrunoKreppel/user/update.php" class="btn btn-primary">Update Profile</a>
+                        <a href="/php/BE20_CR5_BrunoKreppel/user/logout.php" class="btn btn-danger">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
-
-    
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
