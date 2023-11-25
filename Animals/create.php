@@ -27,15 +27,15 @@ if (isset($_POST["create"])) {
 
     if (mysqli_query($conn, $sql)) {
         echo "
-        <div class='alert alert-success mb-0' role='alert'>
-            New entry was created.
-        </div>
+            <div class='alert alert-success mb-0' role='alert'>
+                New entry was created.
+            </div>
         ";
     } else {
         echo "
-        <div class='alert alert-danger mb-0' role='alert'>
-            Something went wrong.
-        </div>
+            <div class='alert alert-danger mb-0' role='alert'>
+                Something went wrong.
+            </div>
         ";
     }
 }
@@ -54,21 +54,13 @@ mysqli_close($conn);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style/stylesheet.css">
-  <style>
-    body{
-      font-family: var(--font);
-      background-color: var(--primary-color);
-      color: var(--text-color);
-    }
-    .form-control {
-        background-color: #f8f9fa;
-        border: 1px solid #000000;
-    }
-    h1{
-      color: var(--accent-color);
-    }
-  </style>
+    <link rel="stylesheet" href="../style/stylesheet.css">
+    <style>
+        .form-control {
+            background-color: #f8f9fa;
+            border: 1px solid #000000;
+        }
+    </style>
 
     <script>
         function checkFormLength() {
@@ -100,10 +92,10 @@ mysqli_close($conn);
 
     <?php require_once '../components/navbar.php'; ?>
 
-<div class="container">
-    <h1 class="fw-bold text-center my-5 display-3">Create Animal Entry</h1>
-    <hr class='my-2 mb-5' style=" color: var(--accent-color);">
-</div>
+    <div class="container">
+        <h1 class="fw-bold text-center my-5 display-3">Create Animal Entry</h1>
+        <hr class='my-2 mb-5' style=" color: var(--accent-color);">
+    </div>
 
     <div class="container">
         <form action="" method="post" name="updateForm" onsubmit="return checkFormLength();">

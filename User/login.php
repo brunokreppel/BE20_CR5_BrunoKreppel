@@ -35,30 +35,33 @@ if (isset($_POST["login"])) {
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) === 1) {
-          $row = mysqli_fetch_assoc($result);
-          if ($row["status"] === "user") {
-              // Code for user status
-              $_SESSION["user"] = $row["user_id"];
-              header("Location: profile.php"); // Redirect to profile.php
-              exit();
-          } elseif ($row["status"] === "adm") {
-              // Code for admin status
-              $_SESSION["adm"] = $row["user_id"];
-              header("Location: profile.php"); // Redirect to profile.php
-              exit();
-          }
-      } else {
-          echo "
-          <div class='alert alert-danger' role='alert'>
-              Invalid email or password!
-          </div>
-          ";
-      }
+            $row = mysqli_fetch_assoc($result);
+            if ($row["status"] === "user") {
+                // Code for user status
+                $_SESSION["user"] = $row["user_id"];
+                header("Location: profile.php"); 
+                exit();
+            } elseif ($row["status"] === "adm") {
+                // Code for admin status
+                $_SESSION["adm"] = $row["user_id"];
+                header("Location: profile.php"); 
+                exit();
+            }
+        } else {
+            echo "
+            <div class='alert alert-danger' role='alert'>
+                Invalid email or password!
+            </div>
+            ";
+        }
     }
 }
 
 mysqli_close($conn);
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -68,57 +71,48 @@ mysqli_close($conn);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style/stylesheet.css">
-  <style>
-    body{
-      font-family: var(--font);
-      background-color: var(--primary-color);
-      color: var(--text-color);
-    }
-    .container1 {
-          
+    <link rel="stylesheet" href="../style/stylesheet.css">
+    <style>
+        .container1 {
             margin: auto;
             margin-top: 50px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             padding: 20px;
             border-radius: 8px;
         }
-  </style>
+    </style>
 </head>
 
 <body>
     <?php require_once '../components/navbar.php'; ?>
     <?php require_once '../components/hero.php'; ?>
- 
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-            <div class="container container1">
-    <h1 class="fw-bold text-center my-5 display-3">Login <img width="64" height="64" src="https://img.icons8.com/color/64/dog-paw-print.png" alt="dog-paw-print"/>
-
-</h1>
-                <form action="" method="post">
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email:</label>
-                        <input type="email" name="email" id="email" class="form-control">
-                        <span class="text-danger"><?= $emailError ?></span>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password:</label>
-                        <input type="password" name="password" id="password" class="form-control">
-                        <span class="text-danger"><?= $passError ?></span>
-                    </div>
-                    <div class="d-grid">
-                        <button type="submit" name="login" class="btn btn-primary mt-3">Login</button>
-                    </div>
-                </form>
+                <div class="container container1">
+                    <h1 class="fw-bold text-center my-5 display-3">Login <img width="64" height="64" src="https://img.icons8.com/color/64/dog-paw-print.png" alt="dog-paw-print" /></h1>
+                    <form action="" method="post">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" name="email" id="email" class="form-control">
+                            <span class="text-danger"><?= $emailError ?></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password:</label>
+                            <input type="password" name="password" id="password" class="form-control">
+                            <span class="text-danger"><?= $passError ?></span>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" name="login" class="btn btn-primary mt-3">Login</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
 </html>

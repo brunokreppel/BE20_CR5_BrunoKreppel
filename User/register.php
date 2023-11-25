@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-if (isset($_SESSION["user"]) || isset($_SESSION["adm"]) ){
+if (isset($_SESSION["user"]) || isset($_SESSION["adm"])) {
     header("Location: ../index.php");
 }
 
@@ -12,8 +12,9 @@ require_once '../components/fileUpload.php';
 $error = false;
 $emailError = "";
 $passError = "";
+$registrationMessage = "";
 
-if(isset($_POST['register'])){
+if (isset($_POST['register'])) {
     $email = cleanInputs($_POST["email"]);
     $pass = cleanInputs($_POST["password"]);
     $picture = fileUpload($_FILES["picture_url"]);
@@ -23,42 +24,41 @@ if(isset($_POST['register'])){
     $address = cleanInputs($_POST["address"]);
     $passError = "";
 
-    if(empty($email)){
+    if (empty($email)) {
         $error = true;
         $emailError = "Email can not be empty"; 
-    } elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = true;
         $emailError = "This is not an Email"; 
     } else {
         $sql = "SELECT * FROM `user` WHERE email = '$email'"; 
         $result = mysqli_query($conn, $sql);
-        if(mysqli_num_rows($result) !== 0){
+        if (mysqli_num_rows($result) !== 0) {
             $error = true;
             $emailError = "Email already exists.";
         }
     }
 
-    if(empty($pass)){
+    if (empty($pass)) {
         $error = true;
         $passError = "Password can not be empty.";
-    } elseif(strlen($pass) < 6){
+    } elseif (strlen($pass) < 6) {
         $error = true;
         $passError = "Password must be at least 8 characters long.";
     }
 
-    if($error === false){
+    if ($error === false) {
         $pass = hash("sha256", $pass);
 
         $sql = "INSERT INTO `user` (`email`, `password`, `picture_url`, `first_name`, `last_name`, `phone_number`, `address`, `status`) VALUES ('$email', '$pass', '$picture[0]', '$firstName', '$lastName', '$phoneNumber', '$address', 'user')";
         $result = mysqli_query($conn, $sql);
 
-        if($result){
-            echo "<div class='alert alert-success mt-3' role='alert'>
-                    Registration successful! You can now login</a>.
+        if ($result) {
+            $registrationMessage = "<div id='registrationMessage' class='alert alert-success mt-3' role='alert'>
+                    Registration successful! Would you like to <a href='../user/login.php' class='alert-link'>login</a> now?
                   </div>";
-                  header("Location: ../user/login.php");
         } else {
-            echo "<div class='alert alert-danger mt-3' role='alert'>
+            $registrationMessage = "<div id='registrationMessage' class='alert alert-danger mt-3' role='alert'>
                     Something went wrong. Please try again.
                   </div>";
         }
@@ -77,12 +77,6 @@ if(isset($_POST['register'])){
     <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style/stylesheet.css">
     <style>
-        body {
-            font-family: 'Bai Jamjuree', sans-serif;
-            background-color: #f8f9fa;
-            color: #495057;
-        }
-
         .container {
             max-width: 400px;
             margin: auto;
@@ -114,11 +108,13 @@ if(isset($_POST['register'])){
     <?php require_once '../components/navbar.php'; ?>
 
     <div>
-    <h1 class="fw-bold text-center my-2 display-3"> <img width="64" height="64" src="https://img.icons8.com/color/64/dog-paw-print.png" alt="dog-paw-print"/>
-</h1>
-    <hr class='my-2 mb-2' style=" color: var(--accent-color);">
-</div>
+        <h1 class="fw-bold text-center my-2 display-3"> <img width="64" height="64" src="https://img.icons8.com/color/64/dog-paw-print.png" alt="dog-paw-print"/>
+        </h1>
+        <hr class='my-2 mb-2' style=" color: var(--accent-color);">
+    </div>
+
     <div class="container">
+        <?php echo $registrationMessage; ?>
         <h2 class="fw-bold text-center mb-4">User Registration</h2>
         <form action="" method="post" enctype="multipart/form-data">
             <label for="email" class="form-label">Email:</label>

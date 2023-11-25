@@ -44,16 +44,6 @@ if (mysqli_num_rows($result) > 0) {
     <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style/stylesheet.css">
     <style>
-        body {
-            font-family: 'Bai Jamjuree', sans-serif;
-            background-color: #f8f9fa;
-            color: #495057;
-        }
-
-        h1 {
-            color: #ff5a5f;
-        }
-
         .container {
             padding-top: 30px;
         }
@@ -70,7 +60,6 @@ if (mysqli_num_rows($result) > 0) {
 </head>
 
 <body>
-
     <div class="container">
         <h1 class="fw-bold text-center my-5 display-3">User Dashboard</h1>
         <hr class='my-2 mb-5' style="color: #ff5a5f;">
